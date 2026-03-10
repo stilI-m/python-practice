@@ -17,7 +17,11 @@ def get_crypto_price(message):
         data = response.json()
         price = float(data['price'])
         bot.reply_to(message, f"Текущая цена {coin}: {price:.2f} $")
+        bot.send_sticker(message.chat.id, "CAACAgIAAxkBAANKabAYjn0wFNOucnbeOpjJ8k96k8IAAlEZAAJxUvhLb6zXHKQwRGo6BA")
     else:
         bot.reply_to(message, f"Ошибка! Монета '{coin}' не найдена на бирже.")
-
+        bot.send_sticker(message.chat.id, "CAACAgIAAxkBAAMqabAVktolcz7je1RfrHhE2r8-hDUAAvsVAAIZalFIbzYfFAX-ZBk6BA")
+@bot.message_handler(content_types=['sticker'])
+def catch_sticker_id(message):
+    print("ID этого стикера:", message.sticker.file_id)
 bot.polling(none_stop=True)
